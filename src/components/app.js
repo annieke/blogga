@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
+import { AppBar, RaisedButton } from 'material-ui';
 import Posts from './posts';
 import NewPost from './newpost';
 import Post from './post';
@@ -9,8 +9,12 @@ import Post from './post';
 const NavBar = (props) => {
   return (
     <AppBar
-      iconElementLeft={<NavLink to="/" exact>the potato diary</NavLink>}
-      iconElementRight={<NavLink to="/posts/new">new post</NavLink>}
+      title={<NavLink to="/" exact className="main-title">the potato diary</NavLink>}
+      iconElementLeft={<span />}
+      iconElementRight={
+        <NavLink to="/posts/new">
+          <RaisedButton label="new post" style={{ margin: 5 }} />
+        </NavLink>}
     />
   );
 };

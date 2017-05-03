@@ -25,7 +25,7 @@ class Posts extends Component {
       postlist = this.props.all.map((post) => {
         return (
           <Link to={`/post/${post.id}`} key={post.id}>
-            <Card>
+            <Card className="post">
               <CardMedia>
                 <img src={post.cover_url} alt="cover" />
               </CardMedia>

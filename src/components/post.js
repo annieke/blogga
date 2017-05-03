@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { RaisedButton, CircularProgress } from 'material-ui';
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import marked from 'marked';
 import { fetchPost, deletePost, updatePost } from '../actions';
 
 class Post extends Component {
@@ -112,7 +113,9 @@ class Post extends Component {
         </div>
       );
     } else {
-      return (<div>{this.props.post.content}</div>);
+      return (
+        <div dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
+      );
     }
   }
 

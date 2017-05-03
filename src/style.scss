@@ -17,6 +17,10 @@ a {
   text-decoration: none;
 }
 
+.main-title {
+  color: #fff;
+}
+
 .spinner {
   width: 40px;
   height: 40px;
@@ -59,13 +63,20 @@ a {
   }
 }
 
-.active {
-  color: pink;
-}
-
 .postlist {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.post {
+  width: 250px;
+  margin: 20px;
+}
+
+.post:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
 }
 
 .inputs {
