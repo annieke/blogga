@@ -32,7 +32,13 @@ export function createPost(post, history) {
 }
 
 export function updatePost(post) {
-  /* axios put */
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/posts/${post._id}${API_KEY}`).then((response) => {
+      dispatch({ type: ActionTypes.FETCH_POST, payload: response });
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
 }
 
 export function fetchPost(id) {
