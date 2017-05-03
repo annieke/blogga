@@ -1,18 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
 import Posts from './posts';
 import NewPost from './newpost';
 import Post from './post';
 
 const NavBar = (props) => {
   return (
-    <nav>
-      <ul>
-        <li><NavLink to="/" exact>the potato diary</NavLink></li>
-        <li><NavLink to="/posts/new">new post</NavLink></li>
-      </ul>
-    </nav>
+    <AppBar
+      iconElementLeft={<NavLink to="/" exact>the potato diary</NavLink>}
+      iconElementRight={<NavLink to="/posts/new">new post</NavLink>}
+    />
   );
 };
 

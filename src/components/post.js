@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { RaisedButton } from 'material-ui';
+import { RaisedButton, CircularProgress } from 'material-ui';
 import { fetchPost, deletePost } from '../actions';
 
 class Post extends Component {
@@ -9,6 +9,11 @@ class Post extends Component {
     super(props);
 
     this.state = {
+      _id: this.props.post._id,
+      cover_url: this.props.post.cover_url,
+      title: this.props.post.title,
+      content: this.props.post.content,
+      tags: this.props.post.tags,
     };
   }
 
@@ -20,7 +25,7 @@ class Post extends Component {
     if (!this.props.post) {
       return (
         <div>
-          loading...
+          <CircularProgress size={80} thickness={7} />
         </div>
       );
     } else {
