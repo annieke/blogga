@@ -31,9 +31,9 @@ export function createPost(post, history) {
   };
 }
 
-export function updatePost(post) {
+export function updatePost(id, update) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${post._id}${API_KEY}`, post).then((response) => {
+    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, update).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response });
     }).catch((error) => {
       console.error(error);
