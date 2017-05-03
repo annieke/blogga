@@ -46,5 +46,11 @@ export function fetchPost(id) {
 }
 
 export function deletePost(id, history) {
-  /* axios delete */
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(() => {
+      history.push('/');
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
 }
