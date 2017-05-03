@@ -8,23 +8,27 @@ export const ActionTypes = {
   // DELETE_POST: 'DELETE_POST',
 };
 
+const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
+const API_KEY = '?key=annie_ke';
+
 export function fetchPosts() {
   return (dispatch) => {
-    const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
-    const API_KEY = '?key=annie_ke';
-    // const res;
-
     axios.get(`${ROOT_URL}/posts${API_KEY}`).then((response) => {
-      // res = response;
+      dispatch({ type: ActionTypes.FETCH_POSTS, payload: response });
     }).catch((error) => {
-      console.log('error during fetchPosts()');
+      console.error(error);
     });
-    // dispatch({ type: ActionTypes.FETCH_POSTS, payload: res });
   };
 }
 
 export function createPost(post, history) {
-  /* axios post */
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then(() => {
+      history.push('/');
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
 }
 
 export function updatePost(post) {
@@ -32,7 +36,13 @@ export function updatePost(post) {
 }
 
 export function fetchPost(id) {
-  /* axios get */
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
+      dispatch({ type: ActionTypes.FETCH_POST, payload: response });
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
 }
 
 export function deletePost(id, history) {
