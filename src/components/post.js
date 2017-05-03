@@ -148,15 +148,15 @@ class Post extends Component {
       );
     } else {
       return (
-        <div>
-          <div>
+        <div className="post-frame">
+          <div className="post-buttons">
             <Link to="/" exact>back to index</Link>
             <RaisedButton
               onClick={() => this.props.deletePost(this.props.post._id, this.props.history)}
               label="delete" secondary
             />
           </div>
-          <div key={this.props.post._id}>
+          <div key={this.props.post._id} className="post-body">
             <Card>
               <CardMedia
                 onClick={() => {

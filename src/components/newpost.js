@@ -37,7 +37,7 @@ class NewPost extends Component {
 
   render() {
     return (
-      <div>
+      <div className="new-post-page">
         <div>create a new post</div>
         <div className="inputs">
           <TextField
