@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { RaisedButton, CircularProgress } from 'material-ui';
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import Textarea from 'react-textarea-autosize';
 import marked from 'marked';
 import { fetchPost, deletePost, updatePost } from '../actions';
 
@@ -60,8 +61,8 @@ class Post extends Component {
   renderCover() {
     if (this.state.coverIsEditing) {
       return (
-        <div>
-          <input
+        <div className="padded-textarea">
+          <Textarea
             onChange={this.onCoverURLChange} value={this.state.cover_url}
             onBlur={() => {
               this.props.updatePost(this.props.post._id,
@@ -80,8 +81,8 @@ class Post extends Component {
   renderTitle() {
     if (this.state.titleIsEditing) {
       return (
-        <div>
-          <input
+        <div className="padded-textarea">
+          <Textarea
             onChange={this.onTitleChange} value={this.state.title}
             onBlur={() => {
               this.props.updatePost(this.props.post._id,
@@ -101,7 +102,7 @@ class Post extends Component {
     if (this.state.contentIsEditing) {
       return (
         <div>
-          <input
+          <Textarea
             onChange={this.onContentChange} value={this.state.content}
             onBlur={() => {
               this.props.updatePost(this.props.post._id,
@@ -122,8 +123,8 @@ class Post extends Component {
   renderTags() {
     if (this.state.tagsAreEditing) {
       return (
-        <div>
-          <input
+        <div className="padded-textarea">
+          <Textarea
             onChange={this.onTagsChange} value={this.state.tags}
             onBlur={() => {
               this.props.updatePost(this.props.post._id,
