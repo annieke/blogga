@@ -135,7 +135,7 @@ class Post extends Component {
         </div>
       );
     } else {
-      return (<div>{this.props.post.tags}</div>);
+      return (<div className="tags">{this.props.post.tags}</div>);
     }
   }
 

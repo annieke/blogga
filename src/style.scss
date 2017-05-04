@@ -90,6 +90,15 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 60%;
+}
+
+.new-post-buttons {
+  margin-top: 20px;
+}
+
+.submit-button {
+  margin-right: 10px;
 }
 
 .post-frame {
@@ -110,4 +119,10 @@ a {
 
 .post-body {
   width: 60%;
+}
+
+.tags {
+  padding: 16px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
 }

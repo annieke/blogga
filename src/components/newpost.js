@@ -38,30 +38,34 @@ class NewPost extends Component {
   render() {
     return (
       <div className="new-post-page">
-        <div>create a new post</div>
+        <h1>create a new post</h1>
         <div className="inputs">
           <TextField
+            fullWidth
             floatingLabelText="title"
             onChange={this.onTitleChange} value={this.state.title}
           />
           <TextField
+            fullWidth
             floatingLabelText="tags"
             onChange={this.onTagsChange} value={this.state.tags}
           />
           <TextField
+            fullWidth
             floatingLabelText="content"
             multiLine
             rows={4}
             onChange={this.onContentChange} value={this.state.content}
           />
           <TextField
+            fullWidth
             floatingLabelText="cover_url"
             onChange={this.onCoverURLChange} value={this.state.cover_url}
           />
-          <div>
+          <div className="new-post-buttons">
             <RaisedButton
               onClick={() => this.props.createPost(this.state, this.props.history)}
-              label="submit" primary
+              label="submit" className="submit-button" primary
             />
             <Link to="/" exact><RaisedButton label="cancel" secondary /></Link>
           </div>
