@@ -8,12 +8,13 @@ export const ActionTypes = {
   // DELETE_POST: 'DELETE_POST',
 };
 
-const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
+// const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
+const ROOT_URL = 'https://annie-blogs.herokuapp.com/api';
 const API_KEY = '?key=annie_ke';
 
 export function fetchPosts() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts${API_KEY}`).then((response) => {
+    axios.get(`${ROOT_URL}/posts`).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POSTS, payload: response });
     }).catch((error) => {
       console.error(error);
@@ -23,7 +24,7 @@ export function fetchPosts() {
 
 export function createPost(post, history) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then(() => {
+    axios.post(`${ROOT_URL}/posts`, post).then(() => {
       history.push('/');
     }).catch((error) => {
       console.error(error);
@@ -33,7 +34,7 @@ export function createPost(post, history) {
 
 export function updatePost(id, update) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, update).then((response) => {
+    axios.put(`${ROOT_URL}/posts/${id}`, update).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response });
     }).catch((error) => {
       console.error(error);
@@ -43,7 +44,7 @@ export function updatePost(id, update) {
 
 export function fetchPost(id) {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
+    axios.get(`${ROOT_URL}/posts/${id}`).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response });
     }).catch((error) => {
       console.error(error);
@@ -53,7 +54,7 @@ export function fetchPost(id) {
 
 export function deletePost(id, history) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(() => {
+    axios.delete(`${ROOT_URL}/posts/${id}`).then(() => {
       history.push('/');
     }).catch((error) => {
       console.error(error);
