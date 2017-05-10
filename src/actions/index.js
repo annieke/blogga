@@ -8,7 +8,6 @@ export const ActionTypes = {
   // DELETE_POST: 'DELETE_POST',
 };
 
-// const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 const ROOT_URL = 'https://annie-blogs.herokuapp.com/api';
 const API_KEY = '?key=annie_ke';
 
