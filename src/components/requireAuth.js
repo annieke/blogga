@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
 
-class RequireAuth extends Component {
-  componentWillMount() {
+export default function (ComposedComponent) {
+  class RequireAuth extends Component {
+    componentWillMount() {
+      if (!this.props.authenticated) {
+        this.props.history.push('/signin');
+      }
+    }
+
+    componentWillUpdate(nextProps) {
+      if (!nextProps.authenticated) {
+        this.props.history.push('/signin');
+      }
+    }
+
+    render() {
+      return (
+        <ComposedComponent {...this.props} />
+      );
+    }
 
   }
 
-  componentWillUpdate() {
+  const mapStateToProps = state => (
+    {
+      authenticated: state.auth.authenticated,
+    }
+  );
 
-  }
-
-  render() {
-    return (<div />);
-  }
-
+  return connect(mapStateToProps, null)(RequireAuth);
 }
-
-const mapStateToProps = state => (
-  {
-    authenticated: state.auth.authenticated,
-  }
-);
-
-export default withRouter(connect(mapStateToProps, null)(RequireAuth));
