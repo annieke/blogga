@@ -3,13 +3,12 @@ import axios from 'axios';
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
-  // CREATE_POST: 'CREATE_POST',
-  // UPDATE_POST: 'UPDATE_POST',
-  // DELETE_POST: 'DELETE_POST',
+  AUTH_USER: 'AUTH_USER',
+  DEAUTH_USER: 'DEAUTH_USER',
+  AUTH_ERROR: 'AUTH_ERROR',
 };
 
 const ROOT_URL = 'https://annie-blogs.herokuapp.com/api';
-const API_KEY = '?key=annie_ke';
 
 export function fetchPosts() {
   return (dispatch) => {
@@ -23,7 +22,8 @@ export function fetchPosts() {
 
 export function createPost(post, history) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts`, post).then(() => {
+    axios.post(`${ROOT_URL}/posts`, post, { headers: { authorization: localStorage.getItem('token') } })
+    .then(() => {
       history.push('/');
     }).catch((error) => {
       console.error(error);
@@ -33,7 +33,8 @@ export function createPost(post, history) {
 
 export function updatePost(id, update) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${id}`, update).then((response) => {
+    axios.put(`${ROOT_URL}/posts/${id}`, update, { headers: { authorization: localStorage.getItem('token') } })
+    .then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response });
     }).catch((error) => {
       console.error(error);
@@ -53,10 +54,48 @@ export function fetchPost(id) {
 
 export function deletePost(id, history) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}`).then(() => {
+    axios.delete(`${ROOT_URL}/posts/${id}`, { headers: { authorization: localStorage.getItem('token') } })
+    .then(() => {
       history.push('/');
     }).catch((error) => {
       console.error(error);
     });
+  };
+}
+
+export function authError(error) {
+  return {
+    type: ActionTypes.AUTH_ERROR,
+    message: error,
+  };
+}
+
+export function signinUser({ email, password }, history) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/signin`, { email, password }).then((response) => {
+      dispatch({ type: ActionTypes.AUTH_USER });
+      localStorage.setItem('token', response.data.token);
+    }).catch((error) => {
+      dispatch(authError(`Sign In Failed: ${error.response.data}`));
+    });
+  };
+}
+
+export function signupUser({ email, password }, history) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/signup`, { email, password }).then((response) => {
+      dispatch({ type: ActionTypes.AUTH_USER });
+      localStorage.setItem('token', response.data.token);
+    }).catch((error) => {
+      dispatch(authError(`Sign In Failed: ${error.response.data}`));
+    });
+  };
+}
+
+export function signoutUser(history) {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch({ type: ActionTypes.DEAUTH_USER });
+    history.push('/');
   };
 }
