@@ -33,7 +33,9 @@ export function createPost(post, history) {
 
 export function updatePost(id, update) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${id}`, update, { headers: { authorization: localStorage.getItem('token') } })
+    axios.put(`${ROOT_URL}/posts/${id}`, update,
+      { headers: { authorization: localStorage.getItem('token') },
+      })
     .then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response });
     }).catch((error) => {
@@ -75,17 +77,19 @@ export function signinUser({ email, password }, history) {
     axios.post(`${ROOT_URL}/signin`, { email, password }).then((response) => {
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
+      history.push('/');
     }).catch((error) => {
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
     });
   };
 }
 
-export function signupUser({ email, password }, history) {
+export function signupUser({ username, email, password }, history) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/signup`, { email, password }).then((response) => {
+    axios.post(`${ROOT_URL}/signup`, { username, email, password }).then((response) => {
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
+      history.push('/');
     }).catch((error) => {
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
     });

@@ -29,7 +29,8 @@ class Posts extends Component {
               <CardMedia>
                 <img src={post.cover_url} alt="cover" />
               </CardMedia>
-              <CardTitle title={post.title} subtitle={post.tags} />
+              <CardTitle title={post.title} subtitle={`by ${post.author.username}`} />
+              <CardTitle subtitle={post.tags} />
             </Card>
           </Link>
         );

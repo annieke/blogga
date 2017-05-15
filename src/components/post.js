@@ -93,8 +93,19 @@ class Post extends Component {
           />
         </div>
       );
+    } else if (!this.props.post.author.username) {
+      return (
+        <CardTitle
+          title={this.props.post.title}
+        />
+      );
     } else {
-      return (<CardTitle title={this.props.post.title} />);
+      return (
+        <CardTitle
+          title={this.props.post.title}
+          subtitle={`by ${this.props.post.author.username}`}
+        />
+      );
     }
   }
 
@@ -141,7 +152,7 @@ class Post extends Component {
   }
 
   render() {
-    if (!this.props.post) {
+    if (!(this.props.post && this.props.post.author)) {
       return (
         <div>
           <CircularProgress size={80} thickness={7} />
