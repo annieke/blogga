@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AppBar, RaisedButton, FlatButton } from 'material-ui';
 
 const NavBar = (props) => {
